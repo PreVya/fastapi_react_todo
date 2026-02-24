@@ -3,5 +3,5 @@
     <option name="myName" value="Project Default" />
     <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="TsLint" enabled="true" level="WARNING" enabled_by_default="true" />
-  </profile>
+  </profile>git remote add origin https://github.com/PreVya/fastapi_react_todo.git
 </component>

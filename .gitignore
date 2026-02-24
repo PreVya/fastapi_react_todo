@@ -1,0 +1,6 @@
+# React node modules
+React_Todo/node_modules/
+
+# FastAPI virtual environment
+fast_api_test/fastapienv/
+fast_api_test/__pycache__/
