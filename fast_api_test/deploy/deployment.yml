@@ -2,7 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fast-api-test
+  namespace: default
+  labels:
+    app: fast-api-test
+    env: development
+  app: fast-api-test
 spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   selector:
     matchLabels:
       app: fast-api-test
@@ -13,10 +24,23 @@ spec:
     spec:
       containers:
         - name: fast-api-test
-          image: <Image>
+          image: "{{AWS_ACCOUNT_ID}}.dkr.ecr.{{AWS_REGION}}.amazonaws.com/fast-api-test:latest"
           resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
             limits:
               memory: "128Mi"
               cpu: "500m"
           ports:
             - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: fast-api-test-config
+          readinessProbe:
+            httpGet:
+              path: /docs
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3

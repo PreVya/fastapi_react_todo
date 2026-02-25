@@ -12,6 +12,8 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+COPY test.db /app/test.db
+
 COPY . .
 
 EXPOSE 8000
