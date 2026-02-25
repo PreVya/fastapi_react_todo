@@ -6,7 +6,6 @@ metadata:
   labels:
     app: fast-api-test
     env: development
-  app: fast-api-test
 spec:
   replicas: 1
   strategy:
@@ -34,9 +33,9 @@ spec:
               cpu: "500m"
           ports:
             - containerPort: 8000
-          envFrom:
-            - configMapRef:
-                name: fast-api-test-config
+          # envFrom:
+          #   - configMapRef:
+          #       name: fast-api-test-config
           readinessProbe:
             httpGet:
               path: /docs

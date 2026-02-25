@@ -1,12 +1,26 @@
+#For ebs storage class
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: fast-api-test-pvc
-  namespace: default
 spec:
-  storageClassName: manual
+  storageClassName: fast-api-test-ebs
+  accessModes:
+    - ReadWriteOnce
   resources:
     requests:
       storage: 16Gi
-  accessModes:
-    - ReadWriteMany
+
+# If you wanna use node specific storage i.e. hostPath in pv.yml specifies that on an node data is stored. But ofc node is also ephemeral like pods
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: fast-api-test-pvc
+#   namespace: default
+# spec:
+#   storageClassName: manual
+#   resources:
+#     requests:
+#       storage: 16Gi
+#   accessModes:
+#     - ReadWriteMany

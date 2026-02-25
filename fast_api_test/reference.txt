@@ -53,7 +53,70 @@ Ideally a proper DB is to be used but for trial usage i.e. trying out to use PV 
 
 
 
-PVC file:
+PVC file: (here replaced with sc storage class)
 PVC is the claim your pod uses to access PV storage.
 resources.requests.storage → size the pod requests.
 Kubernetes will bind this PVC to the PV we defined.
+
+
+Storage class: (pv file)
+kind: StorageClass
+    - Tells Kubernetes what type of object this is.
+    - A StorageClass defines how dynamic volumes should be created.
+    - It does NOT create storage by itself.
+    - It acts like a template for future PersistentVolumes.
+provisioner: ebs.csi.aws.com
+    - It is the driver responsible for creating the actual storage.
+    - ebs.csi.aws.com -> This is the AWS EBS CSI driver
+type: gp2:
+    gp2	-> General Purpose SSD (older default)
+    gp3	-> Newer general purpose SSD (recommended now)
+    io1/io2	-> High IOPS volumes
+    st1	-> Throughput optimized HDD
+fsType:ext4 
+    file sys type ext4 is linux ...
+    An EBS volume is just a raw block device.
+    It must be formatted before use.
+    Kubernetes formats it automatically using this value.
+reclaimPolicy: Retain
+    Defines what happens when PVC is deleted.
+    Options:
+    Value	Meaning
+    Delete	Delete the EBS volume automatically
+    Retain	Keep the EBS volume
+    Recycle	(Deprecated)
+volumeBindingMode: WaitForFirstConsumer
+    This is VERY important in multi-AZ clusters.
+    Options:
+    Mode	Meaning
+    Immediate	Volume created immediately when PVC is created
+    WaitForFirstConsumer	Volume created only when Pod is scheduled
+
+
+
+
+What Actually Happens Step-by-Step
+
+You apply StorageClass.
+
+You apply PVC referencing fastapi-ebs.
+
+PVC waits.
+
+You create Deployment.
+
+Pod is scheduled to Node in AZ-1a.
+
+Kubernetes asks AWS:
+
+Create an EBS volume in AZ-1a.
+
+AWS creates disk.
+
+Disk is attached to node.
+
+Formatted as ext4.
+
+Mounted inside pod at /app/data.
+
+That is the full lifecycle.

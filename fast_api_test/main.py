@@ -7,7 +7,8 @@ from fastapi import Query
 
 import os
 #
-db_path = os.path.join(os.getcwd(), "test.db")
+# db_path = os.path.join(os.getcwd(), "test.db")
+db_path = "/app/data/test.db" # Update this path to where your test.db is located as per PV and PVC
 conn = sqlite3.connect(db_path)
 
 
