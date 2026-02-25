@@ -1,0 +1,59 @@
+This is for complete K8S reference. deploy/ dir
+
+The deployment file:
+apiVersion: apps/v1 – standard API version for deployments.
+kind: Deployment – tells K8s to manage pods and updates.
+metadata – name, namespace, and labels for identification.
+spec.replicas – number of pod replicas. You can scale later.
+strategy – RollingUpdate ensures zero downtime updates.
+maxSurge: how many extra pods can be created temporarily during update.
+maxUnavailable: how many pods can be unavailable during update.
+selector.matchLabels – ensures Deployment knows which pods belong to it.
+template.metadata.labels – labels applied to pods. Must match selector.
+spec.containers – actual container definition.
+name – container name.
+image – Docker image to use. Variables like {{AWS_ACCOUNT_ID}} will be replaced during CI/CD.
+ports.containerPort – port your app listens on inside the pod.
+envFrom.configMapRef – imports environment variables from ConfigMap. no external secrest /env in this case so configmap.yml not there and tthus this fields will not find in deployment.yml also.
+resources – requests and limits for CPU/memory, helps K8s scheduler.
+readinessProbe – tells K8s if pod is ready to serve traffic.
+volumeMounts – mount the .env from ConfigMap as a file in container.
+spec.volumes – defines volumes used by pods. Here it’s a ConfigMap volume.
+
+The service file:
+kind: Service – exposes your pods inside/outside cluster.
+type: NodePort – makes pod accessible via <NodeIP>:<NodePort> on any node.
+selector – selects pods with matching label.
+ports –
+    port = port inside cluster to expose
+    targetPort = pod container port
+    nodePort = port exposed on nodes
+
+
+HPA file:
+apiVersion: autoscaling/v2 – newer HPA API.
+scaleTargetRef – which deployment to scale.
+minReplicas/maxReplicas – limits for autoscaling.
+metrics – CPU-based scaling, average utilization triggers scaling.
+
+
+ConfigMap file: (not present here for this proj coz not required)
+- kind: ConfigMap → stores non-sensitive configuration (environment variables).
+- {{ VAR_NAME }} → placeholder. During CI/CD, pipeline replaces it with actual .env contents (e.g., DATABASE_URL=sqlite:///./data/test.db).
+- Mounted in container as a file, so your FastAPI app reads it at /app/.env.
+
+PV file:
+Persistent vol is needed in this case coz the sqlite3 db is attached to backend and when a pod with backend dies, then the db also dies. New pod created, resets the db coz a new test.db is created. 
+Persistence is lost and hence we create a volume in K8s only and store there. 
+Ideally a proper DB is to be used but for trial usage i.e. trying out to use PV and PVC of K8s i have used PVC and PV herein.
+
+- hostPath → simple storage for trial/demo; not production-grade.
+-ReadWriteOnce → only one pod writes at a time (SQLite limitation).
+-storageClassName → static PV binding to PVC.
+
+
+
+PVC file:
+PVC is the claim your pod uses to access PV storage.
+resources.requests.storage → size the pod requests.
+Kubernetes will bind this PVC to the PV we defined.
