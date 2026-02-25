@@ -44,3 +44,10 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
             failureThreshold: 3
+          volumeMounts:
+            - name: test-db
+              mountPath: /app/data
+      volumes:
+        - name: test-db
+          persistentVolumeClaim:
+            claimName: fast-api-test-pvc
