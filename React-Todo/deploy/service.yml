@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-todo-service
+  namespace: default
+spec:
+  type: LoadBalancer
+  selector:
+    app: react-todo
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
