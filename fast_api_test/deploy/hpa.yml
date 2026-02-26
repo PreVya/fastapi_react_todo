@@ -9,7 +9,7 @@ spec:
     kind: Deployment
     name: fast-api-test
   minReplicas: 1
-  maxReplicas: 3
+  maxReplicas: 1 #Ideally shud be 3 or 5. Since this is a trial app and sqlite3 is being used,and PVC is used, we can only have 1 replica. Else all 3 will try to access the ebs at once and in case of sqlite3 it is not possible coz it is ReadWriteOnce .If you want to have more replicas, you need to use a storage class and proper external DB that supports ReadWriteMany access mode and update the PVC accordingly.
   metrics:
     - type: Resource
       resource:

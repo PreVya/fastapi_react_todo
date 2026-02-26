@@ -19,7 +19,7 @@ spec:
         app: react-todo
     spec:
       containers:
-        - name: react-todopp
+        - name: react-todo
           image: "{{AWS_ACCOUNT_ID}}.dkr.ecr.{{AWS_REGION}}.amazonaws.com/react-todo:latest"
           resources:
             requests:

@@ -95,7 +95,7 @@ volumeBindingMode: WaitForFirstConsumer
 
 
 
-What Actually Happens Step-by-Step
+What Actually Happens Step-by-Step in case of storage class.
 
 You apply StorageClass.
 
