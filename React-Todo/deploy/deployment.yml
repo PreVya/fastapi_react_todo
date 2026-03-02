@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: react-todo
-          image: "{{AWS_ACCOUNT_ID}}.dkr.ecr.{{AWS_REGION}}.amazonaws.com/react-todo:latest"
+          image: "{{AWS_ACCOUNT_ID}}.dkr.ecr.{{AWS_REGION}}.amazonaws.com/trial-repo:frontend-latest"
           resources:
             requests:
               memory: "128Mi"

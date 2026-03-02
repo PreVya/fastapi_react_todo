@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: fast-api-test
-          image: "{{AWS_ACCOUNT_ID}}.dkr.ecr.{{AWS_REGION}}.amazonaws.com/fast-api-test:latest"
+          image: "{{AWS_ACCOUNT_ID}}.dkr.ecr.{{AWS_REGION}}.amazonaws.com/trial-repo:backend-latest"
           resources:
             requests:
               memory: "128Mi"
