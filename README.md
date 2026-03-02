@@ -10,5 +10,6 @@ Audience: sts.amazonaws.com
 <img width="1536" height="632" alt="image" src="https://github.com/user-attachments/assets/f8e91bda-2197-4a46-8d24-5addc9768bb5" />
 
 3. Add secrets like AWS_ACCOUNT_ID, AWS_REGION, ECR_REPO etc to github secrets
+<img width="1076" height="461" alt="image" src="https://github.com/user-attachments/assets/2a6fad77-d3e1-435c-b20e-6f2b68812891" />
 
 4.  
