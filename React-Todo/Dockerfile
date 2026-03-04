@@ -8,7 +8,7 @@ RUN chown -R appuser:appgroup /app
 
 USER appuser
 
-COPY react-todo/package.json .
+COPY package.json yarn.lock ./
 
 RUN yarn install 
 
