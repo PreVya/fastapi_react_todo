@@ -8,7 +8,7 @@ parameters:
   type: gp2
   fsType: ext4
 reclaimPolicy: Retain
-volumeBindingMode: WaitForFirstConsumer 
+volumeBindingMode: Immmediate
 
 # If you wanna use node specific storage i.e. hostPath in pv.yml specifies that on an node data is stored. But ofc node is also ephemeral like pods
 # apiVersion: v1
