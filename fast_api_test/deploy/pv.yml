@@ -2,7 +2,7 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: fast-api-test-ebs
+  name: fast-api-test-ebs-immediate
 provisioner: ebs.csi.aws.com
 parameters:
   type: gp2
