@@ -37,7 +37,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    #needs: build-and-push
+    needs: build-and-push
     steps:
       - name: Configure kubectl for EKS
         run: |
