@@ -1,6 +1,6 @@
 FROM node:16-alpine
 
-RUN addgroup -S appgroup && user -m -S appuser -G appgroup
+RUN addgroup -S appgroup && adduser -m -S appuser -G appgroup
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY react-todo/package.json .
 
 RUN yarn install 
 
-COPY ./React-Todo/ .
+COPY . .
 
 EXPOSE 3000
 
