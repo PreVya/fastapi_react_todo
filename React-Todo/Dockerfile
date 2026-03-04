@@ -12,7 +12,7 @@ COPY react-todo/package.json .
 
 RUN yarn install 
 
-COPY react-todo/ .
+COPY React-Todo/ .
 
 EXPOSE 3000
 
