@@ -40,4 +40,4 @@ jobs:
       - name: Deploy Frontend and Backend to EKS
         run: |
           kubectl apply -f ./React-Todo/deploy/
-          kubectl apply -f ./fast-api-test/deploy/
+          kubectl apply -f ./fast_api_test/deploy/
