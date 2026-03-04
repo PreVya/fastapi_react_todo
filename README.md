@@ -16,3 +16,7 @@ Github workflow details here:<br>
 
 5. Go to Actions tab in repo and run the workspace.<br>
    <img width="1907" height="767" alt="image" src="https://github.com/user-attachments/assets/1f5a864f-02a9-4e5a-b44c-13ce37d23488" /><br>
+   The output will be as follows and a greeen tick seen (if jobs/workspace fails then red cross and from logs get to error and modify our files accordingly)<br>
+   <img width="1907" height="849" alt="image" src="https://github.com/user-attachments/assets/34d7b4a1-89b5-42f9-a2cb-02a35e83369b" /><br>
+
+6. Now check your EKS in AWS for the deployed apps.
