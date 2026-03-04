@@ -4,7 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: fast-api-test-pvc
 spec:
-  storageClassName: fast-api-test-ebs
+  storageClassName: fast-api-test-ebs-immediate
   accessModes:
     - ReadWriteOnce
   resources:
